@@ -19,6 +19,7 @@
 
     Use of this script is at your own risk.
 #>
+
 param
 (
     [Parameter(Mandatory = $true)]
@@ -29,6 +30,11 @@ param
     [switch]$IncludeGroups,
     [switch]$IncludeGroupMembers
 )
+
+if ($IncludeGroupMembers -and -not $IncludeGroups)
+{
+    throw "The -IncludeGroupMembers switch requires -IncludeGroups to also be specified."
+}
 
 Import-Module ActiveDirectory
 
